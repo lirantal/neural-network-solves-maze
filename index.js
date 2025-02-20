@@ -60,8 +60,10 @@ function generateTrainingData() {
                         
                         data.push({
                             input: {
-                                x: x / maze[0].length,
-                                y: y / maze.length,
+                                // TBD: we can also normalize the x/y values
+                                // to keep them between 0 and 1
+                                x: x,
+                                y: y,
                                 direction_x: dx,
                                 direction_y: dy
                             },
@@ -117,8 +119,8 @@ function solveMaze() {
                 maze[newY][newX] !== '#') {
                 
                 const output = net.run({
-                    x: currentPos[0] / maze[0].length,
-                    y: currentPos[1] / maze.length,
+                    x: currentPos[0],
+                    y: currentPos[1],
                     direction_x: dx,
                     direction_y: dy
                 });
