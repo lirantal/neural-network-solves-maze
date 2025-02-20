@@ -47,7 +47,7 @@ function generateTrainingData() {
                     
                     // Check if move is valid
                     if (newY >= 0 && newY < maze.length &&
-                        newX >= 0 && newX < maze[0].length &&
+                        newX >= 0 && newX < maze[y].length &&
                         maze[newY][newX] !== '#') {
                         
                         // Calculate distance to exit before and after move
