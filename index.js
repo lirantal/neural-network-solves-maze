@@ -54,6 +54,8 @@ function generateTrainingData() {
                         newX >= 0 && newX < maze[y].length &&
                         maze[newY][newX] !== '#') {
                         
+                        visuzlizeMazeAtPosition(maze, [newX, newY])
+
                         // Calculate distance to exit before and after move
                         const currentDist = calculateManhattenDistance(x, y, end[0], end[1]);
                         const newDist = calculateManhattenDistance(newX, newY, end[0], end[1]);
@@ -153,7 +155,6 @@ function solveMaze() {
 
 // Test the solution
 const solution = solveMaze();
-
 console.log(stats);
 
 if (solution) {
@@ -172,4 +173,14 @@ if (solution) {
     visualMaze.forEach(row => console.log(row.join(' ')));
 } else {
     console.log('No solution found');
+}
+
+function visuzlizeMazeAtPosition(maze, currentPosition) {
+    const visualMaze = maze.map(row => [...row]);
+
+    const [x, y] = currentPosition;
+    visualMaze[y][x] = '*';
+    
+    console.log('\nPath through the maze:');
+    visualMaze.forEach(row => console.log(row.join(' ')));
 }
