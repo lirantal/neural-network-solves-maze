@@ -2,14 +2,30 @@ const timers = require('node:timers/promises');
 const brain = require('brain.js');
 
 // Define the maze structure
+// const maze = [
+//     ['#', '#', '#', '#', '#', '#', '#'],
+//     ['S', ' ', ' ', ' ', '#', ' ', '#'],
+//     ['#', '#', '#', ' ', '#', ' ', '#'],
+//     ['#', ' ', ' ', ' ', ' ', ' ', '#'],
+//     ['#', ' ', '#', '#', '#', ' ', '#'],
+//     ['#', ' ', ' ', ' ', '#', ' ', 'E'],
+//     ['#', '#', '#', '#', '#', '#', '#']
+// ];
+
 const maze = [
     ['#', '#', '#', '#', '#', '#', '#'],
     ['S', ' ', ' ', ' ', '#', ' ', '#'],
     ['#', '#', '#', ' ', '#', ' ', '#'],
     ['#', ' ', ' ', ' ', ' ', ' ', '#'],
     ['#', ' ', '#', '#', '#', ' ', '#'],
-    ['#', ' ', ' ', ' ', '#', ' ', 'E'],
-    ['#', '#', '#', '#', '#', '#', '#']
+    ['#', ' ', ' ', ' ', '#', ' ', '#'],
+    ['#', ' ', ' ', '#', '#', ' ', '#'],
+    ['#', ' ', ' ', '#', '#', ' ', '#'],
+    ['#', ' ', ' ', '#', '#', ' ', '#'],
+    ['#', ' ', '#', '#', '#', ' ', '#'],
+    ['#', ' ', '#', '#', '#', ' ', '#'],
+    ['E', ' ', ' ', '#', '#', ' ', '#'],
+    ['#', '#', '#', '#', '#', '#', '#'],
 ];
 
 let storedMazeTrainingProgress = []
@@ -125,6 +141,7 @@ function solveMaze() {
     const path = [currentPos];
     const maxSteps = 100; // Prevent infinite loops
     let steps = 0;
+    const visited = new Set();
     
     while (steps < maxSteps) {
         steps++;
@@ -136,6 +153,8 @@ function solveMaze() {
         
         let bestMove = null;
         let bestScore = -1;
+
+        visited.add(`${currentPos[0]},${currentPos[1]}`);
         
         directions.forEach(([dx, dy]) => {
             const newX = currentPos[0] + dx;
@@ -143,7 +162,8 @@ function solveMaze() {
             
             if (newY >= 0 && newY < maze.length &&
                 newX >= 0 && newX < maze[0].length &&
-                maze[newY][newX] !== '#') {
+                maze[newY][newX] !== '#'
+                && !visited.has(`${newX},${newY}`)) {
                 
                 const output = net.run({
                     x: currentPos[0],
