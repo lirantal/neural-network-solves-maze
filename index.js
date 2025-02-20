@@ -1,3 +1,4 @@
+const timers = require('node:timers/promises');
 const brain = require('brain.js');
 
 // Define the maze structure
@@ -109,7 +110,7 @@ function generateTrainingData() {
 
 // Create and train the neural network
 const net = new brain.NeuralNetwork({
-    hiddenLayers: [8, 8]
+    hiddenLayers: [4]
 });
 
 const trainingData = generateTrainingData();
@@ -177,26 +178,41 @@ function solveMaze() {
     return null;
 }
 
-// Test the solution
-const solution = solveMaze();
-console.log(stats);
+async function printTrainingProgress() {
+    // clear the console
+    console.clear();
+    console.log('\nPath through the maze:\n');
 
-if (solution) {
-    console.log('Solution found!');
-    
-    // Create a copy of the maze to visualize the path
-    const visualMaze = maze.map(row => [...row]);
-    solution.forEach(([x, y]) => {
-        if (visualMaze[y][x] !== 'S' && visualMaze[y][x] !== 'E') {
-            visualMaze[y][x] = '*';
-        }
-    });
-    
-    // Print the solution
-    console.log('\nPath through the maze:');
-    visualMaze.forEach(row => console.log(row.join(' ')));
-} else {
-    console.log('No solution found');
+    for (let i = 0; i < storedMazeTrainingProgress.length; i++) {
+        console.clear();
+        storedMazeTrainingProgress[i].forEach(row => console.log(row.join(' ')));
+        await timers.setTimeout(300)
+    }
+
+    console.log('\n\n');
 }
 
-console.log(storedMazeTrainingProgress.length)
+printTrainingProgress()
+  .then(() => {
+    // Test the solution
+    const solution = solveMaze();
+    console.log(stats);
+
+    if (solution) {
+        console.log('Solution found!');
+        
+        // Create a copy of the maze to visualize the path
+        const visualMaze = maze.map(row => [...row]);
+        solution.forEach(([x, y]) => {
+            if (visualMaze[y][x] !== 'S' && visualMaze[y][x] !== 'E') {
+                visualMaze[y][x] = '*';
+            }
+        });
+        
+        // Print the solution
+        console.log('\nPath through the maze:');
+        visualMaze.forEach(row => console.log(row.join(' ')));
+    } else {
+        console.log('No solution found');
+    }
+  })
