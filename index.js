@@ -139,6 +139,7 @@ function solveMaze() {
             
             // Check if we reached the exit
             if (maze[currentPos[1]][currentPos[0]] === 'E') {
+                console.log(`Total steps: ${steps}`);
                 return path;
             }
         } else {
@@ -146,6 +147,7 @@ function solveMaze() {
         }
     }
     
+    console.log(`Total steps: ${steps}`);
     return null;
 }
 
