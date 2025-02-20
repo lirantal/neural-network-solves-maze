@@ -110,7 +110,7 @@ function generateTrainingData() {
 
 // Create and train the neural network
 const net = new brain.NeuralNetwork({
-    hiddenLayers: [4]
+    hiddenLayers: [8, 8]
 });
 
 const trainingData = generateTrainingData();
