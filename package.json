@@ -1,0 +1,15 @@
+{
+  "name": "neural-network-solves-maze",
+  "version": "1.0.0",
+  "description": "A Neural Network that solves an ASCII based Maze",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "brain.js": "^2.0.0-beta.24"
+  }
+}
