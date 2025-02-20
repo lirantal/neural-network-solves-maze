@@ -26,6 +26,10 @@ function getPosition(symbol) {
 const start = getPosition('S');
 const end = getPosition('E');
 
+function calculateManhattenDistance(x1, y1, x2, y2) {
+    return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+}
+
 // Generate training data
 function generateTrainingData() {
     const data = [];
@@ -51,8 +55,8 @@ function generateTrainingData() {
                         maze[newY][newX] !== '#') {
                         
                         // Calculate distance to exit before and after move
-                        const currentDist = Math.abs(x - end[0]) + Math.abs(y - end[1]);
-                        const newDist = Math.abs(newX - end[0]) + Math.abs(newY - end[1]);
+                        const currentDist = calculateManhattenDistance(x, y, end[0], end[1]);
+                        const newDist = calculateManhattenDistance(newX, newY, end[0], end[1]);
                         
                         data.push({
                             input: {
@@ -81,7 +85,7 @@ const net = new brain.NeuralNetwork({
 });
 
 const trainingData = generateTrainingData();
-net.train(trainingData, {
+const stats = net.train(trainingData, {
     iterations: 2000,
     errorThresh: 0.005
 });
@@ -145,6 +149,9 @@ function solveMaze() {
 
 // Test the solution
 const solution = solveMaze();
+
+console.log(stats);
+
 if (solution) {
     console.log('Solution found!');
     
