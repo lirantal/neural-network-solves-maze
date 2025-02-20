@@ -11,6 +11,27 @@ const maze = [
     ['#', '#', '#', '#', '#', '#', '#']
 ];
 
+let storedMazeTrainingProgress = []
+
+function visualizeMazeAtPosition(maze, currentPosition) {
+    const visualMaze = maze.map(row => [...row]);
+
+    const [x, y] = currentPosition;
+    visualMaze[y][x] = '*';
+    
+    console.log('\nPath through the maze:');
+    visualMaze.forEach(row => console.log(row.join(' ')));
+}
+
+function saveMazeVisualizationAtPosition(maze, currentPosition) {
+    const visualMaze = maze.map(row => [...row]);
+
+    const [x, y] = currentPosition;
+    visualMaze[y][x] = '*';
+    
+    storedMazeTrainingProgress.push(visualMaze)
+}
+
 // Convert maze positions to coordinates
 function getPosition(symbol) {
     for (let y = 0; y < maze.length; y++) {
@@ -54,7 +75,10 @@ function generateTrainingData() {
                         newX >= 0 && newX < maze[y].length &&
                         maze[newY][newX] !== '#') {
                         
-                        visuzlizeMazeAtPosition(maze, [newX, newY])
+                        // - Do we want to print the maze at this position?
+                        // visualizeMazeAtPosition(maze, [newX, newY])
+                        // - Or do we want to save and print later?
+                        saveMazeVisualizationAtPosition(maze, [newX, newY])
 
                         // Calculate distance to exit before and after move
                         const currentDist = calculateManhattenDistance(x, y, end[0], end[1]);
@@ -175,12 +199,4 @@ if (solution) {
     console.log('No solution found');
 }
 
-function visuzlizeMazeAtPosition(maze, currentPosition) {
-    const visualMaze = maze.map(row => [...row]);
-
-    const [x, y] = currentPosition;
-    visualMaze[y][x] = '*';
-    
-    console.log('\nPath through the maze:');
-    visualMaze.forEach(row => console.log(row.join(' ')));
-}
+console.log(storedMazeTrainingProgress.length)
