@@ -2,7 +2,7 @@
 
 A Neural Network that learns to solve ASCII-based mazes using reinforcement learning.
 
-![Neural Network Maze Solver Demo](./github/neural-net-train.gif)
+![Neural Network Maze Solver Demo](.github/neural-net-train.gif)
 
 ## Overview
 
