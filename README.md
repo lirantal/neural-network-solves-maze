@@ -96,6 +96,10 @@ S       #   #
 
 This project is licensed under the Apache 2.0 License.
 
+## Contributing
+
+Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.
+
 ## Author
 
 Liran Tal <liran@lirantal.com>
