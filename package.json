@@ -1,4 +1,8 @@
 {
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
+  },
   "name": "neural-network-solves-maze",
   "version": "1.0.0",
   "description": "A Neural Network that solves an ASCII based Maze",
