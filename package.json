@@ -1,8 +1,4 @@
 {
-  "publishConfig": {
-    "provenance": true,
-    "access": "public"
-  },
   "name": "neural-network-solves-maze",
   "version": "1.0.0",
   "description": "A Neural Network that solves an ASCII based Maze",
@@ -15,5 +11,9 @@
   "license": "Apache-2.0",
   "dependencies": {
     "brain.js": "^2.0.0-beta.24"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
   }
 }
